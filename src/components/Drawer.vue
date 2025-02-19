@@ -13,7 +13,7 @@ const { closeDrawer, makeOrder } = inject('Drawer')
 </script>
 <template>
   <div @click="closeDrawer" class="fixed top-0 left-0 h-full w-full bg-black z-10 opacity-70"></div>
-  <div class="bg-white w-96 h-full overflow-y-auto z-20 fixed right-0 top-0 p-8">
+  <div class="bg-white w-96 h-full overflow-y-auto z-20 fixed right-0 top-0 p-8 max-md:w-full">
     <DrawerHead />
     <CartItemList />
     <div v-if="AddedItems.length > 0" class="flex flex-col gap-2 my-6">

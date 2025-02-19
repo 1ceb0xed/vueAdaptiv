@@ -12,7 +12,9 @@ const { removeFromDrawer } = inject('Drawer')
 </script>
 
 <template>
-  <div class="flex items-center border border-slate-200 p-4 rounded-xl gap-4 relative">
+  <div
+    class="flex items-center border border-slate-200 p-4 rounded-xl gap-4 relative max-sm:flex-col"
+  >
     <img :src="imageUrl" alt="sneakers" class="w-16 h-16" />
     <div class="flex flex-col">
       <p>{{ title }}</p>

@@ -6,7 +6,10 @@ const { addToCart, addToFavorite } = inject('addToSomethere')
 const favoriteAddedItems = inject('favoriteAddedItems')
 </script>
 <template>
-  <div class="grid grid-cols-4 gap-5 ml-5 mr-5" v-auto-animate>
+  <div
+    class="grid grid-cols-5 max-[1919px]:grid-cols-4 max-[1280px]:grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-5"
+    v-auto-animate
+  >
     <Card
       v-for="item in favoriteAddedItems"
       :key="item.id"
