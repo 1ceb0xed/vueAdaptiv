@@ -200,9 +200,11 @@ provide('Drawer', { openDrawer, closeDrawer, DrawerAddedItems, removeFromDrawer,
 </script>
 <template>
   <Drawer v-if="drawerOpen" :AddedItems="AddedItems" :isMakeOrder="isMakeOrder" />
-  <div class="m-auto bg-white rounded-xl shadow-xl mt-14 w-[1920] ml-[85px] mr-[85px]">
+  <div
+    class="m-auto bg-white rounded-xl shadow-xl mt-14 w-[1920] ml-[85px] mr-[85px] max-md:ml-0 max-md:mr-0"
+  >
     <Header />
-    <div class="p-[60px]">
+    <div class="p-[60px] max-md:p-[10px]">
       <router-view></router-view>
     </div>
   </div>

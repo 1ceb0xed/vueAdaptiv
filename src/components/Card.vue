@@ -11,12 +11,12 @@ defineProps({
 })
 </script>
 <template>
-  <div class="relative w-full h-auto bg-white border border-slate-100 rounded-3xl p-5 max-sm:p-3">
+  <div class="relative w-full h-auto bg-white border border-slate-100 rounded-3xl p-5">
     <div class="flex justify-start">
       <img
         :src="!isFavorite ? '/like-1.svg' : '/like-2.svg'"
         alt="Like"
-        class="cursor-pointer max-sm:w-5 max-sm:h-5"
+        class="cursor-pointer"
         @click="onClickFavorite"
       />
     </div>
@@ -29,13 +29,13 @@ defineProps({
     <div class="relative flex mt-2 justify-between items-center">
       <div class="">
         <span class="text-slate-400 max-sm:text-xs">Цена: </span>
-        <b class="max-sm:text-base">{{ price }}</b>
+        <b class="">{{ price }}</b>
       </div>
       <img
         :src="!isAdded ? '/plus.svg' : '/checked.svg'"
         alt="Plus"
         @click="onClickAdd"
-        class="cursor-pointer max-sm:w-5 max-sm:h-5"
+        class="cursor-pointer"
       />
     </div>
   </div>
