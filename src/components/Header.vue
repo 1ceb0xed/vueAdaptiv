@@ -5,7 +5,9 @@ const totalSummCart = inject('totalSummCart')
 const { openDrawer } = inject('Drawer')
 </script>
 <template>
-  <header class="flex justify-between border-b border-slate-100 px-10 py-8">
+  <header
+    class="flex justify-between border-b border-slate-100 px-10 py-8 max-sm:px-[5px] max-sm:py-[10px] max-lg:flex-col max-lg:items-center"
+  >
     <router-link to="/">
       <div class="flex items-center gap-4">
         <img src="/logo.png" alt="Logo" class="w-11" />
@@ -15,7 +17,7 @@ const { openDrawer } = inject('Drawer')
         </div>
       </div>
     </router-link>
-    <ul class="flex items-center gap-10 text-gray-500">
+    <ul class="flex items-center gap-10 text-gray-500 max-lg:mt-10 max-sm:flex-col">
       <li @click="openDrawer" class="flex items-center gap-3 cursor-pointer hover:text-black">
         <img src="/cart.svg" alt="Cart" />
         <b>{{ totalSummCart }} руб.</b>

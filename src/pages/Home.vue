@@ -7,10 +7,10 @@ const { filter, searchQuery } = inject('refs')
 </script>
 
 <template>
-  <div class="flex justify-between items-center">
-    <h2 class="text-3xl font-bold">Все кроссовки</h2>
+  <div class="flex justify-between items- max-lg:flex-col max-lg:justify-between">
+    <h2 class="flex text-3xl font-bold max-lg:justify-start">Все кроссовки</h2>
 
-    <div class="flex gap-4">
+    <div class="flex gap-4 max-lg:flex-col">
       <select v-model="filter" class="py-2 px-3 border rounded-xl outline-none">
         <option value="name">По названию</option>
         <option value="priceUp">По цене(дешевые)</option>
