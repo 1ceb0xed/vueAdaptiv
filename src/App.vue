@@ -17,6 +17,7 @@ const drawerOpen = ref(false)
 const filter = ref('name')
 const searchQuery = ref('')
 const isMakeOrder = ref(false)
+const isCartOpen = ref(false)
 
 const searchedItems = computed(() => {
   let result = items.value.filter((item) =>
@@ -129,12 +130,19 @@ const fetchAdded = async () => {
   }
 }
 
+const toggleScroll = () => {
+  isCartOpen.value = !isCartOpen.value
+  document.body.classList.toggle('overflow-hidden', isCartOpen.value)
+}
+
 const openDrawer = () => {
   drawerOpen.value = true
+  toggleScroll()
 }
 const closeDrawer = () => {
   drawerOpen.value = false
   isMakeOrder.value = false
+  toggleScroll()
 }
 const DrawerAddedItems = computed(() => {
   return AddedItems.value
