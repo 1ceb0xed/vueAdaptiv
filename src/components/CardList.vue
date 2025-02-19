@@ -7,7 +7,7 @@ const searchedItems = inject('searchedItems')
 </script>
 <template>
   <div
-    class="grid grid-cols-5 max-[1919px]:grid-cols-4 max-[1280px]:grid-cols-3 max-lg:grid-cols-2 gap-5"
+    class="grid grid-cols-5 max-[1919px]:grid-cols-4 max-[1280px]:grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-5"
     v-auto-animate
   >
     <Card
