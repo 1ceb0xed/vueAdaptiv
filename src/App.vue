@@ -10,6 +10,19 @@ onMounted(async () => {
   await fetchAdded()
 }) //подгрузка
 
+//searchedItems -CardList.vue
+//addToFavorite - CardList.vue Favorites.vue
+//addToCart - CardList.vue Favorites.vue
+//fetchFavorites - addToFavorite onMounted
+//fetchAdded - addToCart removeFromDrawer
+//toggleScroll - openDrawer closeDrawer
+//opendrawer - header.vue
+//closeDrawer - Drawer.vue DrawerHead.vue
+//DrawerAddedItems - CartItemList.vue
+//favoriteAddedItems - Favorites.vue
+//totalSummCart - Header.vue Drawer.vue
+//removeFromDrawer - CartItem.vue
+//makeOrder - Drawer.vue
 const items = ref([])
 const AddedItems = ref([])
 const FavoriteItems = ref([])
@@ -138,12 +151,12 @@ const toggleScroll = () => {
 const openDrawer = () => {
   drawerOpen.value = true
   toggleScroll()
-}
+} //оставляем тк нужно прописывать много логики
 const closeDrawer = () => {
   drawerOpen.value = false
   isMakeOrder.value = false
   toggleScroll()
-}
+} //оставляем тк нужно прописывать много логики
 const DrawerAddedItems = computed(() => {
   return AddedItems.value
     .map((addeditem) => {

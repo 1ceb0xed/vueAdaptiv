@@ -29,7 +29,7 @@ defineProps({
     <div class="relative flex mt-2 justify-between items-center">
       <div class="">
         <span class="text-slate-400 max-sm:text-xs">Цена: </span>
-        <b class="">{{ price }}</b>
+        <b class="max-sm:text-xs">{{ price }}</b>
       </div>
       <img
         :src="!isAdded ? '/plus.svg' : '/checked.svg'"
