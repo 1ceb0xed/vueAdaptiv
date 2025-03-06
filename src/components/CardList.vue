@@ -3,6 +3,7 @@ import { inject } from 'vue'
 import Card from './Card.vue'
 const { addToCart, addToFavorite } = inject('addToSomethere')
 const searchedItems = inject('searchedItems')
+//max-xl:grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2
 </script>
 <template>
   <div
