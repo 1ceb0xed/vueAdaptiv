@@ -1,9 +1,8 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import { inject } from 'vue'
 import Card from '../components/Card.vue'
-const { addToCart, addToFavorite } = inject('addToSomethere')
-const favoriteAddedItems = inject('favoriteAddedItems')
+import { useMainStore } from '@/stores/MainStore'
+const mainStore = useMainStore()
 </script>
 <template>
   <div
@@ -11,7 +10,7 @@ const favoriteAddedItems = inject('favoriteAddedItems')
     v-auto-animate
   >
     <Card
-      v-for="item in favoriteAddedItems"
+      v-for="item in mainStore.favoriteAddedItems"
       :key="item.id"
       :id="item.id"
       :price="item.price"
@@ -19,8 +18,8 @@ const favoriteAddedItems = inject('favoriteAddedItems')
       :title="item.title"
       :image-url="item.imageUrl"
       :is-favorite="item.isFavorite"
-      :onClickAdd="() => addToCart(item)"
-      :onClickFavorite="() => addToFavorite(item)"
+      :onClickAdd="() => mainStore.addToCart(item)"
+      :onClickFavorite="() => mainStore.addToFavorite(item)"
     />
   </div>
 </template>

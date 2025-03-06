@@ -1,5 +1,8 @@
 <script setup>
-import { defineProps, inject } from 'vue'
+import { defineProps } from 'vue'
+import { useDrawerStore } from '@/stores/DrawerStore'
+const drawerStore = useDrawerStore()
+
 defineProps({
   id: Number,
   imageUrl: String,
@@ -7,8 +10,6 @@ defineProps({
   price: Number,
   addedId: Number,
 })
-
-const { removeFromDrawer } = inject('Drawer')
 </script>
 
 <template>
@@ -26,7 +27,7 @@ const { removeFromDrawer } = inject('Drawer')
       src="/close.svg"
       :data-id="addedId"
       :data-parent-id="id"
-      @click="removeFromDrawer"
+      @click="drawerStore.removeFromDrawer"
       class="opacity-40 hover:opacity-100 transition cursor-pointer absolute bottom-3 right-3"
     />
   </div>

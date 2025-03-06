@@ -1,22 +1,22 @@
 import { defineStore } from 'pinia'
-import { useFetchAll } from './FetchStore'
+import { useFetchStore } from './FetchStore'
 import axios from 'axios'
 
-const apiStore = useFetchAll()
-
-export const useMain = defineStore('main', {
+export const useMainStore = defineStore('main', {
   state: () => ({
     filter: 'name',
     searchQuery: '',
   }),
   getters: {
     favoriteAddedItems: () => {
-      return apiStore.favoriteItems.map((favoriteItem) => {
-        return apiStore.items.find((item) => item.id === favoriteItem.parentId)
+      const fetchStore = useFetchStore()
+      return fetchStore.favoriteItems.map((favoriteItem) => {
+        return fetchStore.items.find((item) => item.id === favoriteItem.parentId)
       })
     },
-    searchedItems: () => {
-      let result = apiStore.items.filter((item) =>
+    searchedItems() {
+      const fetchStore = useFetchStore()
+      let result = fetchStore.items.filter((item) =>
         item.title.toLowerCase().includes(this.searchQuery.toLowerCase()),
       )
       switch (
@@ -32,14 +32,16 @@ export const useMain = defineStore('main', {
           return result
       }
     },
-    totalSummCart: () => {
-      return apiStore.items
+    totalSummCart() {
+      const fetchStore = useFetchStore()
+      return fetchStore.items
         .filter((item) => item.isAdded)
         .reduce((sum, item) => sum + item.price, 0)
     },
   },
   actions: {
     async addToCart(item) {
+      const fetchStore = useFetchStore()
       try {
         if (!item.isAdded) {
           const obj = {
@@ -56,9 +58,10 @@ export const useMain = defineStore('main', {
       } catch (err) {
         console.log(err)
       }
-      apiStore.fetchAdded()
+      fetchStore.fetchAdded()
     },
     async addToFavorite(item) {
+      const fetchStore = useFetchStore()
       try {
         if (!item.isFavorite) {
           const obj = {
@@ -75,7 +78,7 @@ export const useMain = defineStore('main', {
       } catch (err) {
         console.log(err)
       }
-      apiStore.fetchFavorites()
+      fetchStore.fetchFavorites()
     },
   },
 })

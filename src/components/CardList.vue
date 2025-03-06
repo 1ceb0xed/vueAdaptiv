@@ -1,9 +1,7 @@
 <script setup>
-import { inject } from 'vue'
 import Card from './Card.vue'
-const { addToCart, addToFavorite } = inject('addToSomethere')
-const searchedItems = inject('searchedItems')
-//max-xl:grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2
+import { useMainStore } from '@/stores/MainStore'
+const mainStore = useMainStore()
 </script>
 <template>
   <div
@@ -11,15 +9,15 @@ const searchedItems = inject('searchedItems')
     v-auto-animate
   >
     <Card
-      v-for="item in searchedItems"
+      v-for="item in mainStore.searchedItems"
       :key="item.id"
       :price="item.price"
       :is-added="item.isAdded"
       :title="item.title"
       :image-url="item.imageUrl"
       :is-favorite="item.isFavorite"
-      :onClickAdd="() => addToCart(item)"
-      :onClickFavorite="() => addToFavorite(item)"
+      :onClickAdd="() => mainStore.addToCart(item)"
+      :onClickFavorite="() => mainStore.addToFavorite(item)"
     />
   </div>
 </template>

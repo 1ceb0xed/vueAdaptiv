@@ -1,9 +1,8 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import { inject } from 'vue'
 import CardList from '../components/CardList.vue'
-
-const { filter, searchQuery } = inject('refs')
+import { useMainStore } from '@/stores/MainStore'
+const mainStore = useMainStore()
 </script>
 
 <template>
@@ -11,7 +10,7 @@ const { filter, searchQuery } = inject('refs')
     <h2 class="flex text-3xl font-bold max-lg:justify-start">Все кроссовки</h2>
 
     <div class="flex gap-4 max-lg:flex-col">
-      <select v-model="filter" class="py-2 px-3 border rounded-xl outline-none">
+      <select v-model="mainStore.filter" class="py-2 px-3 border rounded-xl outline-none">
         <option value="name">По названию</option>
         <option value="priceUp">По цене(дешевые)</option>
         <option value="priceDown">По цене(дорогие)</option>
@@ -19,7 +18,7 @@ const { filter, searchQuery } = inject('refs')
       <div class="relative">
         <img class="absolute left-3 top-3" src="/search.svg" alt="search" />
         <input
-          v-model="searchQuery"
+          v-model="mainStore.searchQuery"
           type="text"
           placeholder="Поиск..."
           class="focus:border-gray-400 border rounded-md py-2 pl-10 pr-4 outline-none w-full"

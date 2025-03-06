@@ -1,8 +1,9 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import { inject } from 'vue'
-const totalSummCart = inject('totalSummCart')
-const { openDrawer } = inject('Drawer')
+import { useMainStore } from '@/stores/MainStore'
+import { useDrawerStore } from '@/stores/DrawerStore'
+const drawerStore = useDrawerStore()
+const mainStore = useMainStore()
 </script>
 <template>
   <header
@@ -18,9 +19,12 @@ const { openDrawer } = inject('Drawer')
       </div>
     </router-link>
     <ul class="flex items-center gap-10 text-gray-500 max-lg:mt-10 max-sm:flex-col">
-      <li @click="openDrawer" class="flex items-center gap-3 cursor-pointer hover:text-black">
+      <li
+        @click="drawerStore.openDrawer"
+        class="flex items-center gap-3 cursor-pointer hover:text-black"
+      >
         <img src="/cart.svg" alt="Cart" />
-        <b>{{ totalSummCart }} руб.</b>
+        <b>{{ mainStore.totalSummCart }} руб.</b>
       </li>
       <router-link to="/favorites">
         <li class="flex items-center gap-3 cursor-pointer hover:text-black">

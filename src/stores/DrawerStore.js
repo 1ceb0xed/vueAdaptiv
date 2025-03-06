@@ -1,17 +1,17 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-import { useFetchAll } from './FetchStore'
+import { useFetchStore } from './FetchStore'
 
-const apiStore = useFetchAll()
-export const useDrawer = defineStore('drawer', {
+export const useDrawerStore = defineStore('drawer', {
   state: () => ({
     drawerOpen: false,
     isMakeOrder: false,
   }),
   getters: {
-    drawerAddedItems: () => {
-      return apiStore.addedItems.map((addeditem) => {
-        return apiStore.items.find((item) => item.id === addeditem.parentId)
+    drawerAddedItems() {
+      const fetchStore = useFetchStore()
+      return fetchStore.addedItems.map((addeditem) => {
+        return fetchStore.items.find((item) => item.id === addeditem.parentId)
       })
     },
   },
@@ -26,33 +26,35 @@ export const useDrawer = defineStore('drawer', {
       document.body.classList.toggle('overflow-hidden', false)
     },
     async removeFromDrawer(item) {
+      const fetchStore = useFetchStore()
       try {
         const DeleteId = Number(item.target.dataset.parentId)
         await axios.delete(`https://a3ca5502346e0c49.mokky.dev/cartadded/${item.target.dataset.id}`)
-        const ItemFetchId = apiStore.items.find((obj) => obj.id === DeleteId)
+        const ItemFetchId = fetchStore.items.find((obj) => obj.id === DeleteId)
         if (ItemFetchId) {
           ItemFetchId.isAdded = false
         }
-        apiStore.fetchAdded()
+        fetchStore.fetchAdded()
       } catch (err) {
         console.log(err)
       }
     },
     async makeOrder() {
-      apiStore.AddedItems.forEach(async (addedItem) => {
-        const itemsId = apiStore.items.find((item) => item.id === addedItem.parentId)
+      const fetchStore = useFetchStore()
+      fetchStore.addedItems.forEach(async (addedItem) => {
+        const itemsId = fetchStore.items.find((item) => item.id === addedItem.parentId)
         if (itemsId) {
           itemsId.isAdded = false
         }
       })
-      const itemsToDelete = [...apiStore.AddedItems]
-      apiStore.AddedItems.splice(0, apiStore.AddedItems.length)
+      const itemsToDelete = [...fetchStore.addedItems]
+      fetchStore.addedItems.splice(0, fetchStore.addedItems.length)
       this.isMakeOrder = true
       try {
         for (const addedItem of itemsToDelete) {
           try {
             await axios.delete(`https://a3ca5502346e0c49.mokky.dev/cartadded/${addedItem.id}`)
-            apiStore.AddedItems
+            fetchStore.addedItems
           } catch (err) {
             console.log(err)
           }

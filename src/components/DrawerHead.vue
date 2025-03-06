@@ -1,12 +1,11 @@
 <script setup>
-import { inject } from 'vue'
-
-const { closeDrawer } = inject('Drawer')
+import { useDrawerStore } from '@/stores/DrawerStore'
+const drawerStore = useDrawerStore()
 </script>
 <template>
   <div class="flex items-center gap-5 mb-5">
     <svg
-      @click="closeDrawer"
+      @click="drawerStore.closeDrawer"
       class="opacity-30 cursor-pointer rotate-180 hover:opacity-100 transition hover:-translate-x-1"
       width="16"
       height="14"

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
-export const useFetchAll = defineStore('fetch', {
+export const useFetchStore = defineStore('fetch', {
   state: () => ({
     items: [],
     addedItems: [],
@@ -18,7 +18,6 @@ export const useFetchAll = defineStore('fetch', {
           favoriteId: null,
           addedId: null,
         }))
-        console.log(this.items)
       } catch (err) {
         console.log(err)
       }
@@ -38,7 +37,6 @@ export const useFetchAll = defineStore('fetch', {
             addedId: added.id,
           }
         })
-        console.log(this.addedItems)
       } catch (err) {
         console.log(err)
       }
@@ -58,7 +56,6 @@ export const useFetchAll = defineStore('fetch', {
             favoriteId: favorite.id,
           }
         })
-        console.log(this.favoriteItems)
       } catch (err) {
         console.log(err)
       }
