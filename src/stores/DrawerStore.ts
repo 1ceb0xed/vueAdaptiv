@@ -1,14 +1,15 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { useFetchStore } from './FetchStore'
+import { item } from './FetchStore'
 
 export const useDrawerStore = defineStore('drawer', {
   state: () => ({
-    drawerOpen: false,
-    isMakeOrder: false,
+    drawerOpen: false as boolean,
+    isMakeOrder: false as boolean,
   }),
   getters: {
-    drawerAddedItems() {
+    drawerAddedItems(): (item | undefined)[] {
       const fetchStore = useFetchStore()
       return fetchStore.addedItems.map((addeditem) => {
         return fetchStore.items.find((item) => item.id === addeditem.parentId)
@@ -16,16 +17,16 @@ export const useDrawerStore = defineStore('drawer', {
     },
   },
   actions: {
-    openDrawer() {
+    openDrawer(): void {
       this.drawerOpen = true
       document.body.classList.toggle('overflow-hidden', true)
     },
-    closeDrawer() {
+    closeDrawer(): void {
       this.drawerOpen = false
       this.isMakeOrder = false
       document.body.classList.toggle('overflow-hidden', false)
     },
-    async removeFromDrawer(item) {
+    async removeFromDrawer(item): Promise<void> {
       const fetchStore = useFetchStore()
       try {
         const DeleteId = Number(item.target.dataset.parentId)
@@ -39,7 +40,7 @@ export const useDrawerStore = defineStore('drawer', {
         console.log(err)
       }
     },
-    async makeOrder() {
+    async makeOrder(): Promise<void> {
       const fetchStore = useFetchStore()
       fetchStore.addedItems.forEach(async (addedItem) => {
         const itemsId = fetchStore.items.find((item) => item.id === addedItem.parentId)

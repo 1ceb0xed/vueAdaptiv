@@ -1,20 +1,21 @@
 import { defineStore } from 'pinia'
 import { useFetchStore } from './FetchStore'
+import { item } from './FetchStore'
 import axios from 'axios'
 
 export const useMainStore = defineStore('main', {
   state: () => ({
-    filter: 'name',
-    searchQuery: '',
+    filter: 'name' as 'name' | 'priceUP' | 'priceDown',
+    searchQuery: '' as string,
   }),
   getters: {
-    favoriteAddedItems: () => {
+    favoriteAddedItems: (): (item | undefined)[] => {
       const fetchStore = useFetchStore()
       return fetchStore.favoriteItems.map((favoriteItem) => {
         return fetchStore.items.find((item) => item.id === favoriteItem.parentId)
       })
     },
-    searchedItems() {
+    searchedItems(): item[] {
       const fetchStore = useFetchStore()
       let result = fetchStore.items.filter((item) =>
         item.title.toLowerCase().includes(this.searchQuery.toLowerCase()),
@@ -32,7 +33,7 @@ export const useMainStore = defineStore('main', {
           return result
       }
     },
-    totalSummCart() {
+    totalSummCart(): number {
       const fetchStore = useFetchStore()
       return fetchStore.items
         .filter((item) => item.isAdded)
@@ -40,7 +41,7 @@ export const useMainStore = defineStore('main', {
     },
   },
   actions: {
-    async addToCart(item) {
+    async addToCart(item: item): Promise<void> {
       const fetchStore = useFetchStore()
       try {
         if (!item.isAdded) {
@@ -60,7 +61,7 @@ export const useMainStore = defineStore('main', {
       }
       fetchStore.fetchAdded()
     },
-    async addToFavorite(item) {
+    async addToFavorite(item: item): Promise<void> {
       const fetchStore = useFetchStore()
       try {
         if (!item.isFavorite) {
