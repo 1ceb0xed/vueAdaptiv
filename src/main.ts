@@ -5,8 +5,8 @@ import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
 import { createPinia } from 'pinia'
 
 import App from './App.vue'
-import Home from './pages/Home.vue'
-import Favorites from './pages/Favorites.vue'
+import Home from './pages/AppHome.vue'
+import Favorites from './pages/AppFavorites.vue'
 
 const app = createApp(App)
 const pinia = createPinia()
@@ -20,6 +20,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 })
+
 app.use(pinia)
 app.use(router)
 app.use(autoAnimatePlugin)

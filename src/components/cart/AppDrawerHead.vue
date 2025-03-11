@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useDrawerStore } from '@/stores/DrawerStore'
 const drawerStore = useDrawerStore()
 </script>

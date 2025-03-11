@@ -1,21 +1,25 @@
 import { defineStore } from 'pinia'
 import { useFetchStore } from './FetchStore'
-import { item } from './FetchStore'
+import { Item } from './FetchStore'
 import axios from 'axios'
+import { it } from 'node:test'
 
 export const useMainStore = defineStore('main', {
   state: () => ({
-    filter: 'name' as 'name' | 'priceUP' | 'priceDown',
+    filter: 'name' as 'name' | 'priceUp' | 'priceDown',
     searchQuery: '' as string,
   }),
   getters: {
-    favoriteAddedItems: (): (item | undefined)[] => {
+    favoriteAddedItems: (): Item[] => {
       const fetchStore = useFetchStore()
-      return fetchStore.favoriteItems.map((favoriteItem) => {
-        return fetchStore.items.find((item) => item.id === favoriteItem.parentId)
-      })
+      return fetchStore.favoriteItems
+        .map((favoriteItem) => {
+          const item = fetchStore.items.find((item) => item.id === favoriteItem.parentId)
+          return item || null
+        })
+        .filter((item) => item !== null) // тут жаловался типо find может выдать undefind пришлось дописывать этот фильтр и условие
     },
-    searchedItems(): item[] {
+    searchedItems(): Item[] {
       const fetchStore = useFetchStore()
       let result = fetchStore.items.filter((item) =>
         item.title.toLowerCase().includes(this.searchQuery.toLowerCase()),
@@ -41,7 +45,7 @@ export const useMainStore = defineStore('main', {
     },
   },
   actions: {
-    async addToCart(item: item): Promise<void> {
+    async addToCart(item: Item): Promise<void> {
       const fetchStore = useFetchStore()
       try {
         if (!item.isAdded) {
@@ -61,7 +65,7 @@ export const useMainStore = defineStore('main', {
       }
       fetchStore.fetchAdded()
     },
-    async addToFavorite(item: item): Promise<void> {
+    async addToFavorite(item: Item): Promise<void> {
       const fetchStore = useFetchStore()
       try {
         if (!item.isFavorite) {

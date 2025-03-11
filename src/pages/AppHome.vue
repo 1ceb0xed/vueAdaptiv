@@ -1,6 +1,5 @@
-<!-- eslint-disable vue/multi-word-component-names -->
-<script setup>
-import CardList from '../components/CardList.vue'
+<script setup lang="ts">
+import * as CardList from '../components/card/AppCardList.vue'
 import { useMainStore } from '@/stores/MainStore'
 const mainStore = useMainStore()
 </script>
@@ -27,6 +26,6 @@ const mainStore = useMainStore()
     </div>
   </div>
   <div class="mt-10">
-    <CardList />
+    <CardList.default />
   </div>
 </template>

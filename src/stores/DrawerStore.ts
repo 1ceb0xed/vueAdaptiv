@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { useFetchStore } from './FetchStore'
-import { item } from './FetchStore'
+import { Item } from './FetchStore'
 
 export const useDrawerStore = defineStore('drawer', {
   state: () => ({
@@ -9,12 +9,15 @@ export const useDrawerStore = defineStore('drawer', {
     isMakeOrder: false as boolean,
   }),
   getters: {
-    drawerAddedItems(): (item | undefined)[] {
+    drawerAddedItems(): Item[] {
       const fetchStore = useFetchStore()
-      return fetchStore.addedItems.map((addeditem) => {
-        return fetchStore.items.find((item) => item.id === addeditem.parentId)
-      })
-    },
+      return fetchStore.addedItems
+        .map((addeditem) => {
+          const item = fetchStore.items.find((Item) => Item.id === addeditem.parentId)
+          return item || null
+        })
+        .filter((item) => item !== null)
+    }, // тут жаловался типо find может выдать undefind пришлось дописывать этот фильтр и условие
   },
   actions: {
     openDrawer(): void {
@@ -26,11 +29,12 @@ export const useDrawerStore = defineStore('drawer', {
       this.isMakeOrder = false
       document.body.classList.toggle('overflow-hidden', false)
     },
-    async removeFromDrawer(item): Promise<void> {
+    async removeFromDrawer(event: MouseEvent): Promise<void> {
       const fetchStore = useFetchStore()
       try {
-        const DeleteId = Number(item.target.dataset.parentId)
-        await axios.delete(`https://a3ca5502346e0c49.mokky.dev/cartadded/${item.target.dataset.id}`)
+        const target = event.target as HTMLElement
+        const DeleteId = Number(target.dataset.parentId)
+        await axios.delete(`https://a3ca5502346e0c49.mokky.dev/cartadded/${target.dataset.id}`)
         const ItemFetchId = fetchStore.items.find((obj) => obj.id === DeleteId)
         if (ItemFetchId) {
           ItemFetchId.isAdded = false
@@ -43,7 +47,7 @@ export const useDrawerStore = defineStore('drawer', {
     async makeOrder(): Promise<void> {
       const fetchStore = useFetchStore()
       fetchStore.addedItems.forEach(async (addedItem) => {
-        const itemsId = fetchStore.items.find((item) => item.id === addedItem.parentId)
+        const itemsId = fetchStore.items.find((Item) => Item.id === addedItem.parentId)
         if (itemsId) {
           itemsId.isAdded = false
         }

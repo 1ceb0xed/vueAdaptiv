@@ -1,7 +1,6 @@
-<!-- eslint-disable vue/multi-word-component-names -->
-<script setup>
-import DrawerHead from './DrawerHead.vue'
-import CartItemList from './CartItemList.vue'
+<script setup lang="ts">
+import * as DrawerHead from './AppDrawerHead.vue'
+import * as CartItemList from './AppCartItemList.vue'
 import { useDrawerStore } from '@/stores/DrawerStore'
 import { useFetchStore } from '@/stores/FetchStore'
 import { useMainStore } from '@/stores/MainStore'
@@ -15,8 +14,8 @@ const drawerStore = useDrawerStore()
     class="fixed top-0 left-0 h-full w-full bg-black z-10 opacity-70"
   ></div>
   <div class="bg-white w-96 h-full overflow-y-auto z-20 fixed right-0 top-0 p-8 max-md:w-full">
-    <DrawerHead />
-    <CartItemList />
+    <DrawerHead.default />
+    <CartItemList.default />
     <div v-if="fetchStore.addedItems.length > 0" class="flex flex-col gap-2 my-6">
       <div class="flex gap-2">
         <span>Итого:</span>

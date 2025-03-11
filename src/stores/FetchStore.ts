@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
-export interface item {
+export interface Item {
   id: number
   title: string
   price: number
@@ -24,14 +24,14 @@ export interface favoriteItem {
 
 export const useFetchStore = defineStore('fetch', {
   state: () => ({
-    items: [] as item[],
+    items: [] as Item[],
     addedItems: [] as addedItem[],
     favoriteItems: [] as favoriteItem[],
   }),
   actions: {
     async fetchItems(): Promise<void> {
       try {
-        const { data } = await axios.get<item[]>('https://a3ca5502346e0c49.mokky.dev/items')
+        const { data } = await axios.get<Item[]>('https://a3ca5502346e0c49.mokky.dev/items')
         this.items = data.map((obj) => ({
           ...obj,
           isFavorite: false,

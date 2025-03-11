@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "esnext", // Компиляция в ESNext
+    "module": "esnext", // Модульная система ESNext
+    "moduleResolution": "node", // Разрешение модулей через Node.js
+    "strict": true, // Включение строгой типизации
+    "esModuleInterop": true, // Для совместимости с модулями ES
+    "skipLibCheck": true, // Пропуск проверки типов библиотек
+    "forceConsistentCasingInFileNames": true, // Убедитесь, что пути файлов не различаются по регистру
+    "jsx": "preserve", // Поддержка JSX, если используете
+    "allowJs": true, // Разрешение использования JavaScript
+    "resolveJsonModule": true, // Разрешение импорта JSON
+    "isolatedModules": true, // Для поддержки модулей
+    "noEmit": true, // Не генерировать выходные файлы
+    "baseUrl": ".", // Базовый путь для разрешения модулей
+    "paths": {
+      "@/*": ["./src/*"] // Ваши алиасы путей остаются без изменений
+    }
+  },
+  "include": [
+    "src/**/*.ts", // Включаем все TypeScript файлы
+    "src/**/*.d.ts", // Включаем типы
+    "src/**/*.tsx", // Включаем JSX файлы, если используете
+    "src/**/*.vue", // Включаем Vue компоненты
+    "src/components/cart/**/*.vue",
+    "src/components/card/**/*.vue",
+    "src/shims-vue.d.ts" // Для поддержки типов Vue
+  ],
+  "exclude": [
+    "node_modules", // Исключаем node_modules
+    "dist" // Исключаем выходную директорию
+  ]
+}
