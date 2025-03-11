@@ -2,11 +2,11 @@
 import { onMounted, ref } from 'vue'
 
 import * as Header from './components/AppHeader.vue'
-import * as Drawer from './components/cart/AppDrawer.vue'
+import * as Cart from './components/cart/AppCart.vue'
 import { useFetchStore } from './stores/FetchStore'
-import { useDrawerStore } from './stores/DrawerStore'
+import { useCartStore } from './stores/CartStore'
 
-const drawerStore = useDrawerStore()
+const cartStore = useCartStore()
 const fetchStore = useFetchStore()
 const loader = ref(true)
 
@@ -24,7 +24,7 @@ onMounted(async () => {
     <div class="loader"></div>
   </div>
   <div v-else>
-    <Drawer.default v-if="drawerStore.drawerOpen" />
+    <Cart.default v-if="cartStore.cartOpen" />
     <div
       class="m-auto bg-white rounded-xl shadow-xl mt-14 w-[1920] ml-[85px] mr-[85px] max-md:ml-0 max-md:mr-0"
     >

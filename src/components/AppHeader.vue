@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useMainStore } from '@/stores/MainStore'
-import { useDrawerStore } from '@/stores/DrawerStore'
-const drawerStore = useDrawerStore()
+import { useCartStore } from '@/stores/CartStore'
+const cartStore = useCartStore()
 const mainStore = useMainStore()
 </script>
 <template>
@@ -19,7 +19,7 @@ const mainStore = useMainStore()
     </RouterLink>
     <ul class="flex items-center gap-10 text-gray-500 max-lg:mt-10 max-sm:flex-col">
       <li
-        @click="drawerStore.openDrawer"
+        @click="cartStore.openCart"
         class="flex items-center gap-3 cursor-pointer hover:text-black"
       >
         <img src="/cart.svg" alt="Cart" />

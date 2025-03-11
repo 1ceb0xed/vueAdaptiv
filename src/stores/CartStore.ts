@@ -3,13 +3,13 @@ import axios from 'axios'
 import { useFetchStore } from './FetchStore'
 import { Item } from './FetchStore'
 
-export const useDrawerStore = defineStore('drawer', {
+export const useCartStore = defineStore('Cart', {
   state: () => ({
-    drawerOpen: false as boolean,
+    cartOpen: false as boolean,
     isMakeOrder: false as boolean,
   }),
   getters: {
-    drawerAddedItems(): Item[] {
+    cartAddedItems(): Item[] {
       const fetchStore = useFetchStore()
       return fetchStore.addedItems
         .map((addeditem) => {
@@ -20,16 +20,16 @@ export const useDrawerStore = defineStore('drawer', {
     }, // тут жаловался типо find может выдать undefind пришлось дописывать этот фильтр и условие
   },
   actions: {
-    openDrawer(): void {
-      this.drawerOpen = true
+    openCart(): void {
+      this.cartOpen = true
       document.body.classList.toggle('overflow-hidden', true)
     },
-    closeDrawer(): void {
-      this.drawerOpen = false
+    closeCart(): void {
+      this.cartOpen = false
       this.isMakeOrder = false
       document.body.classList.toggle('overflow-hidden', false)
     },
-    async removeFromDrawer(event: MouseEvent): Promise<void> {
+    async removeFromCart(event: MouseEvent): Promise<void> {
       const fetchStore = useFetchStore()
       try {
         const target = event.target as HTMLElement

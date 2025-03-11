@@ -2,7 +2,6 @@ import { defineStore } from 'pinia'
 import { useFetchStore } from './FetchStore'
 import { Item } from './FetchStore'
 import axios from 'axios'
-import { it } from 'node:test'
 
 export const useMainStore = defineStore('main', {
   state: () => ({

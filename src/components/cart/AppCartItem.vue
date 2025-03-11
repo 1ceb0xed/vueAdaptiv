@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
-import { useDrawerStore } from '@/stores/DrawerStore'
+import { useCartStore } from '@/stores/CartStore'
 import { Item } from '@/stores/FetchStore'
-const drawerStore = useDrawerStore()
+const cartStore = useCartStore()
 
 defineProps<{ item: Item }>()
 </script>
@@ -22,7 +22,7 @@ defineProps<{ item: Item }>()
       src="/close.svg"
       :data-id="item.addedId"
       :data-parent-id="item.id"
-      @click="drawerStore.removeFromDrawer"
+      @click="cartStore.removeFromCart"
       class="opacity-40 hover:opacity-100 transition cursor-pointer absolute bottom-3 right-3"
     />
   </div>

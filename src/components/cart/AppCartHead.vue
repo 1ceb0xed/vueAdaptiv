@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useDrawerStore } from '@/stores/DrawerStore'
-const drawerStore = useDrawerStore()
+import { useCartStore } from '@/stores/CartStore'
+const cartStore = useCartStore()
 </script>
 <template>
   <div class="flex items-center gap-5 mb-5">
     <svg
-      @click="drawerStore.closeDrawer"
+      @click="cartStore.closeCart"
       class="opacity-30 cursor-pointer rotate-180 hover:opacity-100 transition hover:-translate-x-1"
       width="16"
       height="14"
