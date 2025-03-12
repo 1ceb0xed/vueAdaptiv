@@ -23,7 +23,7 @@ const mainStore = useMainStore()
         class="flex items-center gap-3 cursor-pointer hover:text-black"
       >
         <img src="/cart.svg" alt="Cart" />
-        <b>{{ mainStore.totalSummCart }} руб.</b>
+        <b>{{ cartStore.totalSummCart }} руб.</b>
       </li>
       <RouterLink to="/favorites">
         <li class="flex items-center gap-3 cursor-pointer hover:text-black">

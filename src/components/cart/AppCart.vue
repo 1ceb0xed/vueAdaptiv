@@ -2,7 +2,7 @@
 import * as CartHead from './AppCartHead.vue'
 import * as CartItemList from './AppCartItemList.vue'
 import { useCartStore } from '@/stores/CartStore'
-import { useFetchStore } from '@/stores/FetchStore'
+import { useFetchStore } from '@/stores/SneakerStore'
 import { useMainStore } from '@/stores/MainStore'
 const fetchStore = useFetchStore()
 const mainStore = useMainStore()
@@ -20,7 +20,7 @@ const cartStore = useCartStore()
       <div class="flex gap-2">
         <span>Итого:</span>
         <div class="flex-1 border-b border-dashed"></div>
-        <b>{{ mainStore.totalSummCart }} Руб</b>
+        <b>{{ cartStore.totalSummCart }} Руб</b>
       </div>
       <button
         @click="cartStore.makeOrder"

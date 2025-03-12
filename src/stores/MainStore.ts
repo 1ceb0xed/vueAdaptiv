@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
-import { useFetchStore } from './FetchStore'
-import { Item } from './FetchStore'
-import axios from 'axios'
+import { useFetchStore } from './SneakerStore'
+import { Item } from './SneakerStore'
 
 export const useMainStore = defineStore('main', {
   state: () => ({
@@ -35,54 +34,6 @@ export const useMainStore = defineStore('main', {
         default:
           return result
       }
-    },
-    totalSummCart(): number {
-      const fetchStore = useFetchStore()
-      return fetchStore.items
-        .filter((item) => item.isAdded)
-        .reduce((sum, item) => sum + item.price, 0)
-    },
-  },
-  actions: {
-    async addToCart(item: Item): Promise<void> {
-      const fetchStore = useFetchStore()
-      try {
-        if (!item.isAdded) {
-          const obj = {
-            parentId: item.id,
-          }
-          item.isAdded = true
-          const { data } = await axios.post('https://a3ca5502346e0c49.mokky.dev/cartadded', obj)
-          item.addedId = data.id
-        } else {
-          item.isAdded = false
-          await axios.delete(`https://a3ca5502346e0c49.mokky.dev/cartadded/${item.addedId}`)
-          item.addedId = null
-        }
-      } catch (err) {
-        console.log(err)
-      }
-      fetchStore.fetchAdded()
-    },
-    async addToFavorite(item: Item): Promise<void> {
-      const fetchStore = useFetchStore()
-      try {
-        if (!item.isFavorite) {
-          const obj = {
-            parentId: item.id,
-          }
-          item.isFavorite = true
-          const { data } = await axios.post('https://a3ca5502346e0c49.mokky.dev/favorites', obj)
-          item.favoriteId = data.id
-        } else {
-          item.isFavorite = false
-          await axios.delete(`https://a3ca5502346e0c49.mokky.dev/favorites/${item.favoriteId}`)
-          item.favoriteId = null
-        }
-      } catch (err) {
-        console.log(err)
-      }
-      fetchStore.fetchFavorites()
     },
   },
 })

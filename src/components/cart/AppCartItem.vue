@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
 import { useCartStore } from '@/stores/CartStore'
-import { Item } from '@/stores/FetchStore'
+import { Item } from '@/stores/SneakerStore'
 const cartStore = useCartStore()
 
 defineProps<{ item: Item }>()

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Item } from '@/stores/FetchStore'
-import { useMainStore } from '@/stores/MainStore'
-const mainStore = useMainStore()
+import { Item } from '@/stores/SneakerStore'
+import { useCartStore } from '@/stores/CartStore'
+const cartStore = useCartStore()
 defineProps<{
   item: Item
 }>()
@@ -13,7 +13,7 @@ defineProps<{
         :src="!item.isFavorite ? '/like-1.svg' : '/like-2.svg'"
         alt="Like"
         class="cursor-pointer"
-        @click="mainStore.addToFavorite(item)"
+        @click="cartStore.addToFavorite(item)"
       />
     </div>
     <div class="w-full max-h-[260px] flex justify-center">
@@ -30,7 +30,7 @@ defineProps<{
       <img
         :src="!item.isAdded ? '/plus.svg' : '/checked.svg'"
         alt="Plus"
-        @click="mainStore.addToCart(item)"
+        @click="cartStore.addToCart(item)"
         class="cursor-pointer"
       />
     </div>

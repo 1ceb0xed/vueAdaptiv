@@ -3,7 +3,7 @@ import { onMounted, ref } from 'vue'
 
 import * as Header from './components/AppHeader.vue'
 import * as Cart from './components/cart/AppCart.vue'
-import { useFetchStore } from './stores/FetchStore'
+import { useFetchStore } from './stores/SneakerStore'
 import { useCartStore } from './stores/CartStore'
 
 const cartStore = useCartStore()

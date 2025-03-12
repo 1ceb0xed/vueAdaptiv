@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import * as Card from '../card/AppCard.vue'
 import { useMainStore } from '@/stores/MainStore'
-import { Item } from '@/stores/FetchStore'
+import { Item } from '@/stores/SneakerStore'
 const mainStore = useMainStore()
 </script>
 <template>
