@@ -3,9 +3,7 @@ import * as CartHead from './AppCartHead.vue'
 import * as CartItemList from './AppCartItemList.vue'
 import { useCartStore } from '@/stores/CartStore'
 import { useFetchStore } from '@/stores/SneakerStore'
-import { useMainStore } from '@/stores/MainStore'
 const fetchStore = useFetchStore()
-const mainStore = useMainStore()
 const cartStore = useCartStore()
 </script>
 <template>

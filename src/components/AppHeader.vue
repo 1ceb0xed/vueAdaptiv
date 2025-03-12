@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { useMainStore } from '@/stores/MainStore'
 import { useCartStore } from '@/stores/CartStore'
 const cartStore = useCartStore()
-const mainStore = useMainStore()
 </script>
 <template>
   <header
